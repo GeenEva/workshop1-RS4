@@ -8,13 +8,6 @@ public class Person {
 	private String lastName;
 	private String middleName;
 
-
-	/*
-	 * Make a public constructor for the Person class with the Builder object passed
-	 * in. This is solving the wrong order input. To check if all instance variable
-	 * are not default there will be a exception.
-	 */
-
 	private Person(PersonBuilder builder) {
 		
 		this.personId = builder.personId;
@@ -111,7 +104,6 @@ public class Person {
 		return account;
 	}
 		
-	// Override the toString method that is inherited from the Object class.
 
 	@Override
 

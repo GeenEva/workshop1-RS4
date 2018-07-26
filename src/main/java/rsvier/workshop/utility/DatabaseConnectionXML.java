@@ -21,22 +21,11 @@ public class DatabaseConnectionXML {
 	private static String PASSWORD;
 	private static String DATABASE_NAME;
 
-	/*
-	 * Create a function that is parsing the xml file. Getting the right values of
-	 * the xml for database connection. We can also declare this class as a
-	 * anonymous static method and just call it once to create the file that should
-	 * be more efficient. Consider this later on in big projects
-	 */
+
 
 	public static void initializeXmlSQL() {
 
-		/*
-		 * Finding the right path for the xml file was a big problem. So when you are
-		 * trying to find the relative path. use the getAbsolutePath() function on that
-		 * xmlFile. You can see there where its looking to your file. Now add the
-		 * missing parts to the new File() and it should find the file. btw don't forget
-		 * to use double backslashes to make it compatible with all Operating Systems.
-		 */
+		
 		File xmlFile = new File("src/main/java/rsvier/workshop/utility/DCXML.xml");
 
 		if (xmlFile.exists()) {
