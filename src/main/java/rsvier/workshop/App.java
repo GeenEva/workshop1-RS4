@@ -26,7 +26,7 @@ public class App {
 		//Just to do a little check:
 		boolean hikCheck = false;
 		try { hikCheck = DataSource.getDataSource().isRunning();
-			System.out.println(hikCheck);}
+			System.out.println("Hikari status = " + hikCheck);}
 		
 		catch (NullPointerException ex) {
 			System.out.println("Hikari status = " + hikCheck);	
@@ -34,10 +34,10 @@ public class App {
 		
 		
 		// Option to choose database
-
 		view.printAskUserToUseSQLOrMongo();
 
 		MainMenuController mainMenuController = new MainMenuController();
 		mainMenuController.runView();
+		
 	}
 }

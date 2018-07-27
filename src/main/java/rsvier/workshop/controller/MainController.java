@@ -26,31 +26,31 @@ public class MainController {
     				currentController = personController;
     				break;
     				
-            case EMPLOYEE:
-                currentController = employeeController;
-                break;
-                
-            case CUSTOMER:
-                currentController = customerController;
-                break;
-                
-            case MAINMENU:
-                currentController = mainMenuController;
-                break;
-                
-            case ACCOUNT:
-                currentController = accountController;
-                break;
-                
-            case PRODUCT:
-            		currentController = productController;
-            		break;
-            		
-            case ORDER:
-            		currentController = orderController;
-            		break;
+	            case EMPLOYEE:
+	                currentController = employeeController;
+	                break;
+	                
+	            case CUSTOMER:
+	                currentController = customerController;
+	                break;
+	                
+	            case MAINMENU:
+	                currentController = mainMenuController;
+	                break;
+	                
+	            case ACCOUNT:
+	                currentController = accountController;
+	                break;
+	                
+	            case PRODUCT:
+	            	currentController = productController;
+	            	break;
+	            		
+	            case ORDER:
+	            	currentController = orderController;
+	            	break;
             	
-        }
+    		}
 
         currentController.runView();
     }

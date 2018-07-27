@@ -4,13 +4,15 @@ public class AccountView extends View{
 
 	@Override
 	public void printHeaderMessage() {
-		System.out.println("\n=========== Werknemer  |  Accountbeheer ===========\n");	
+		System.out.println("\n=========== Werknemer  |  Accountbeheer ===========\n");
+		System.out.println("Welkom in het account beheer menu. Hier kunt u de account-gegevens aanpassen\n"
+				+ "door middel van het invullen van het e-mail adres.\n");
 	}
 	
 
 	@Override
 	public void printMenuMessage() {
-		System.out.println("Welke gegevens wilt u veranderen?");
+		System.out.println("\nWelke gegevens wilt u veranderen?\n");
 		System.out.println("1- E-mail\n2- Wachtwoord\n3- Veranderingen opslaan\n0- Terug naar vorige menu");
 	}
 		
@@ -20,11 +22,11 @@ public class AccountView extends View{
 	}
 		
 	public void printRequestEmailInput() {
-		System.out.print("Vul e-mailadres in: ");
+		System.out.print("Vul het e-mailadres in: ");
 	}
 
 	public void printRequestPasswordInput() {
-		System.out.print("Vul wachtwoord in: ");
+		System.out.print("Vul het wachtwoord in: ");
 	}
 
 	public void printLoginDetailsWrong() {

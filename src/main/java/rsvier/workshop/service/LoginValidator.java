@@ -6,12 +6,15 @@ import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.view.*;
 
+
 public class LoginValidator {
 
 	private AccountView accountView = new AccountView();
 	private Controller employeeController = new EmployeeController();
 	private Hashing hashing = new Hashing();
-
+	private Controller customerController = new CustomerController();
+	
+	
 	public void loginCheckAccountValidation() {
 
 		accountView.printRequestEmailInput();
@@ -27,9 +30,15 @@ public class LoginValidator {
 
 			accountView.printLoginDetailsWrong();
 			MainController.setController(TypeOfController.MAINMENU);
+			
 		} else {
+			
 			accountView.printLoginAccountIsSuccessful();
-			employeeController.runView();
+			
+				//for now, only employees can log in
+				employeeController.runView();
+			
+			
 		}
 	}
 

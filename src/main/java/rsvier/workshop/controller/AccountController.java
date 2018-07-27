@@ -12,22 +12,32 @@ public class AccountController extends Controller{
 	private Validator validator = new Validator();
 	private Hashing hashing = new Hashing();
 
-
 	
 	public AccountController() {
 	}
 	
 	
-
 	
 	@Override
 	public void runView() {
 		
 		accountView.printHeaderMessage();
-		changeAccountSwitch(searchAccountByMail());
+		updateAccountSwitch(searchAccountByMail());
 
 	}
 
+	
+	public Account doCreateAccount() {
+		
+		String email = requestAndValidateEmail();
+		String hashedPassword = requestAndValidatePassword();
+		Account account = new Account(email, hashedPassword);
+		//for now, this constructs an account with accountType defaulted to 1
+		
+		account.setAccountId(DAOFactory.getAccountDAO().createAccount(account));
+		accountView.printYourAccountHasBeenCreated();
+		return account;
+	}
 
 	public Account searchAccountByMail(){
 
@@ -36,8 +46,8 @@ public class AccountController extends Controller{
 
 	}
 
-	public void changeAccountSwitch(Account account) {
-
+	
+	public void updateAccountSwitch(Account account) {
 
 		if (account.getEmail() != null) {
 			boolean updating = true;
@@ -45,6 +55,7 @@ public class AccountController extends Controller{
 			while (updating) {
 				accountView.printMenuMessage();
 				int choice = accountView.getIntInput();
+				
 				switch (choice) {
 					case 1: // change e-mail
 						updateEmail(account);
@@ -70,6 +81,7 @@ public class AccountController extends Controller{
 						accountView.printMenuInputIsWrong();
 				}
 			}
+			
 		} else {
 			accountView.printAccountNotFound();
 			MainController.setController(MainController.TypeOfController.EMPLOYEE);
@@ -114,13 +126,5 @@ public class AccountController extends Controller{
 	}
 
 	
-	public Account doCreateAccount() {
-		
-		String email = requestAndValidateEmail();
-		String hashedPassword = requestAndValidatePassword();
-		Account account = new Account(email, hashedPassword);
-		account.setAccountId(DAOFactory.getAccountDAO().createAccount(account));
-		accountView.printYourAccountHasBeenCreated();
-		return account;
-	}
+	
 }
