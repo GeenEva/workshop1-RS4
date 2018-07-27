@@ -14,6 +14,9 @@ import com.mongodb.*;
 
 public class DatabaseConnectionXML {
 
+	//Connection class for both SQL and Mongo
+	
+	
 	private static Logger logger = LogConnection.getLogger();
 
 	private static String URL;
@@ -47,11 +50,44 @@ public class DatabaseConnectionXML {
 				logger.log(Level.WARNING, "Parser/Sax/IOexception occured check log", e);
 
 			}
+			
 		} else {
 			
 			logger.log(Level.INFO, "xmlFile is not existing.");
 		}
 
+	}
+	
+	public static Connection getConnection() throws SQLException {
+
+		/*
+		 * Check if one or more fields of this class are null. If so, first initialize these fields
+		 * by parsing the xml in the initializeXmlSQL() method.
+		 */
+		
+		if (URL == null | USER == null | PASSWORD == null) {
+			initializeXmlSQL();
+		}
+		
+		Connection conn = null;
+		
+		try {
+			
+			/*
+			 * Since the fields are now set, you can use their value now to get connection
+			 */
+			
+			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			logger.log(Level.INFO, "Connected to Database");
+		
+
+		} catch (SQLException e) {
+			
+			logger.log(Level.WARNING, "SQL exeception ocurred. Connection with database failed.", e);
+
+		}
+
+		return conn;
 	}
 
 	public static void initializeXmlMongoDB() {
@@ -75,9 +111,10 @@ public class DatabaseConnectionXML {
 				
 			} catch (ParserConfigurationException | SAXException | IOException e) {
 				
-				logger.log(Level.WARNING, "Parser/Sax/IOexception occured check log", e);
+				logger.log(Level.WARNING, "Parser/Sax/IOexception occured. Check log.", e);
 
 			}
+			
 		} else {
 			
 			logger.log(Level.INFO, "xmlFile is not existing.");
@@ -85,32 +122,9 @@ public class DatabaseConnectionXML {
 
 	}
 
-	public static Connection getConnection() throws SQLException {
-
-		/*
-		 * First perform a check. if one of this values is null call the initialize
-		 * method otherwise skip it.
-		 */
-		if (URL == null | USER == null | PASSWORD == null) {
-			initializeXmlSQL();
-		}
-		Connection conn = null;
-		try {
-
-			conn = DriverManager.getConnection(URL, USER, PASSWORD);
-			logger.log(Level.INFO, "Connected to Database");
-		
-
-		} catch (SQLException e) {
-			
-			logger.log(Level.WARNING, "SQL exeception ocurred. Connection with database failed.", e);
-
-		}
-
-		return conn;
-	}
 	
-	@SuppressWarnings("deprecation")
+	
+	
 	public static DB getConnectionMongoDB() throws UnknownHostException {
 		
 		if (URL == null | DATABASE_NAME == null) {

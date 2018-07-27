@@ -3,12 +3,18 @@ package rsvier.workshop.view;
 import java.math.BigDecimal;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import rsvier.workshop.dao.*;
+import rsvier.workshop.utility.LogConnection;
 
 public abstract class View {
 
+	private static Logger logger = LogConnection.getLogger();
 	private Scanner userInput = new Scanner(System.in);
 
+	
 	public abstract void printHeaderMessage();
 
 	public abstract void printMenuMessage();
@@ -24,6 +30,7 @@ public abstract class View {
 		String userAnswer = userInput.nextLine();
 		if (userAnswer.equalsIgnoreCase("J")) {
 			System.out.println("Hikari connection pool word nu geactiveerd...");
+			logger.log(Level.CONFIG, "Hikari enabled... denk ik");
 			return true;
 		}
 		System.out.println("Jdbc connection pool word nu geactiveerd...");

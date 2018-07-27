@@ -9,20 +9,19 @@ import rsvier.workshop.App;
 public class DataSource {
 
 	private static HikariConfig hikariConfig;
-	private static HikariDataSource ds;
+	private static HikariDataSource dataSource; //The dataSource is specified in hikari.properties
 
 	private static Logger logger = LogConnection.getLogger();
 
 	/*
-	 * Static initializer, runs as soon as the class is loaded. before any static
-	 * method is called and even before any static variable can be used
+	 * This static initializer runs as soon as the class is loaded
 	 */
 
 	static {
 
 		if (App.hikariEnabled) {
 			hikariConfig = new HikariConfig("hikari.properties");
-			ds = new HikariDataSource(hikariConfig);
+			setDataSource(new HikariDataSource(hikariConfig));
 		}
 	}
 
@@ -31,14 +30,15 @@ public class DataSource {
 		if (App.hikariEnabled) {
 
 			try {
-
-				return ds.getConnection();
+				return getDataSource().getConnection();
 
 			} catch (SQLException e) {
 				logger.log(Level.WARNING, "SQL Exception occured, connection with hikari connection pool failed", e);
 
 			}
 		}
+		
+		//if user enters 'no' for hikari, the connection is made via the DatabaseConnectionXML class
 		try {
 
 			return DatabaseConnectionXML.getConnection();
@@ -48,6 +48,14 @@ public class DataSource {
 			logger.log(Level.WARNING, "SQL Exception occured, connection with JDBC connection pool failed", e);
 		}
 		return null;
+	}
+
+	public static HikariDataSource getDataSource() {
+		return dataSource;
+	}
+
+	public static void setDataSource(HikariDataSource dataSource) {
+		DataSource.dataSource = dataSource;
 	}
 
 }
