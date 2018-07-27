@@ -1,5 +1,6 @@
 package rsvier.workshop.domain;
 
+
 public class Person {
 	
 	private int personId;
@@ -8,75 +9,79 @@ public class Person {
 	private String lastName;
 	private String middleName;
 
-	private Person(PersonBuilder builder) {
+	
+	private Person(PersonBuilder personBuilder) {
 		
-		this.personId = builder.personId;
-		this.account = builder.account;
-		this.name = builder.name;
-		this.lastName = builder.lastName;
-		this.middleName = builder.middleName;
+		this.personId = personBuilder.personId;
+		this.account = personBuilder.account;
+		this.name = personBuilder.name;
+		this.lastName = personBuilder.lastName;
+		this.middleName = personBuilder.middleName;
 	}
 
-	public static class PersonBuilder {
-
-		private int personId;
-		private Account account;
-		private String name;
-		private String lastName;
-		private String middleName;
-
-
-		public PersonBuilder() {
-		}
-		
-		public PersonBuilder(Person person) {
-			this.personId = person.personId;
-			this.account = person.account;
-			this.name = person.name;
-			this.lastName = person.lastName;
-			this.middleName = person.lastName;
-			
-		}
-
-		public PersonBuilder personId(int id) {
-			this.personId = id;
-			return this;
-		}
-		
-		public PersonBuilder account(Account account) {
-			this.account = account;
-			
-			return this;
-		}
-		
-
-		public PersonBuilder name(String name) {
-			this.name = name;
-			return this;
-		}
-
-		public PersonBuilder lastName(String lastName) {
-			this.lastName = lastName;
-			return this;
-		}
-
-		public PersonBuilder middleName(String middleName){
-
-			if(middleName == null){
-			this.middleName = " ";
-			} else {
-			this.middleName = middleName;
+	
+		public static class PersonBuilder {
+	
+			private int personId;
+			private Account account;
+			private String name;
+			private String lastName;
+			private String middleName;
+	
+	
+			public PersonBuilder() {
 			}
-			return this;			
+			
+			public PersonBuilder(Person person) {
+				this.personId = person.personId;
+				this.account = person.account;
+				this.name = person.name;
+				this.lastName = person.lastName;
+				this.middleName = person.lastName;
+				
+			}
+	
+			public PersonBuilder personId(int id) {
+				this.personId = id;
+				return this;
+			}
+			
+			public PersonBuilder account(Account account) {
+				this.account = account;
+				
+				return this;
+			}
+			
+	
+			public PersonBuilder name(String name) {
+				this.name = name;
+				return this;
+			}
+	
+			public PersonBuilder lastName(String lastName) {
+				this.lastName = lastName;
+				return this;
+			}
+	
+			public PersonBuilder middleName(String middleName){
+	
+				if(middleName == null){
+				this.middleName = " ";
+				} else {
+				this.middleName = middleName;
+				}
+				return this;			
+			}
+	
+			
+			public Person build() {
+				return new Person(this);
+	
+			}
+	
 		}
-
 		
-		public Person build() {
-			return new Person(this);
-
-		}
-
-	}
+		
 	public int getPersonId() {
 		return personId;
 	}
@@ -84,13 +89,29 @@ public class Person {
 	public void setPersonId(int personId) {
 		this.personId = personId;
 	}
+	
+	public Account getAccount() {
+		return account;
+	}
 
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getLastName() {
 		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getMiddleName() {
@@ -99,10 +120,11 @@ public class Person {
 		else
 		return middleName;
 	}
-
-	public Account getAccount() {
-		return account;
+	
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
+
 		
 
 	@Override
@@ -126,20 +148,6 @@ public class Person {
 		return true;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
+	
 
 }

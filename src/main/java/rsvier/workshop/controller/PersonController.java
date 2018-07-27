@@ -12,21 +12,22 @@ public class PersonController extends Controller {
 	private PersonView personView = new PersonView();
 	private AddressController addressController = new AddressController();
 
+	
 	@Override
 	public void runView() {
 
 		personView.printHeaderMessage();
 		personView.printUpdateUserDetailsMenu();
-		//
+		
 	}
 
+	
 	public void personUpdateMenuSwitch(Person person) {
 
 		// Switch menu for updating personal data like name and address
 		boolean updating = true;
 
 		// Presenting updating options until users chooses '0' for exit
-
 		while (updating) {
 			personView.printUpdateUserDetailsMenu();
 			int choice = personView.getIntInput();
@@ -69,6 +70,7 @@ public class PersonController extends Controller {
 		personBuilder.lastName(personUpdateLastName());
 		personBuilder.middleName(personUpdateMiddleName());
 		Person person = personBuilder.build();
+	
 		person.setPersonId(DAOFactory.getPersonDAO().createPerson(person));
 
 		return person;

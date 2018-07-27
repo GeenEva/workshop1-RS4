@@ -1,5 +1,6 @@
 package rsvier.workshop.domain;
 
+
 public class Account {
 
 	private int accountId;
@@ -9,9 +10,8 @@ public class Account {
 	
 
 	public Account() {
-
-		
 	}
+	
 	
 	public Account(String email, String password) {
 		accountType = 1;
